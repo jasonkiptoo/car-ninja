@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" spacing="20.0" xmlns:fx="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.carassignment.InitialSceneController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Label text="Car Explorer" styleClass="title"/>
+    <Label text="Select a car to view details" styleClass="instruction"/>
+
+    <HBox alignment="CENTER" spacing="10.0">
+        <TextField fx:id="searchBar" promptText="Search for a car..." styleClass="search-bar"/>
+        <Button text="Search" onAction="#onSearchButtonClick" styleClass="search-button"/>
+    </HBox>
+
+    <ListView fx:id="carListView" styleClass="car-list"/>
+
+    <Button text="View Details" onAction="#onViewDetailsButtonClick" styleClass="view-details-button"/>
+</VBox>
