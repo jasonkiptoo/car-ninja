@@ -10,6 +10,8 @@ module org.example.carassignment {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires com.google.gson;
+    requires async.http.client;
 
     opens org.example.carassignment to javafx.fxml;
     exports org.example.carassignment;

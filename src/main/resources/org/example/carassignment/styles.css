@@ -1,0 +1,18 @@
+.root {
+    -fx-font-family: "Arial";
+}
+
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.label {
+    -fx-font-size: 16px;
+    -fx-padding: 10px;
+}
+
+.list-view {
+    -fx-padding: 10px;
+}

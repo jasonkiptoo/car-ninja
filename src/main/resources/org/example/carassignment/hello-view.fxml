@@ -3,25 +3,44 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" spacing="20.0" xmlns:fx="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.carassignment.InitialSceneController">
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example.carassignment.HelloController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
-    <Label text="Car Explorer" styleClass="title"/>
-    <Label text="Select a car to view details" styleClass="instruction"/>
+    <Label fx:id="welcomeText"/>
+    <Button text="Fetch Car Data" onAction="#onFetchCarData"/>
 
-    <HBox alignment="CENTER" spacing="10.0">
-        <TextField fx:id="searchBar" promptText="Search for a car..." styleClass="search-bar"/>
-        <Button text="Search" onAction="#onSearchButtonClick" styleClass="search-button"/>
-    </HBox>
+    <TableView fx:id="carTableView" onMouseClicked="#onCarSelected">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID">
+                <cellValueFactory>
+                    <PropertyValueFactory property="id"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="makeColumn" text="Make">
+                <cellValueFactory>
+                    <PropertyValueFactory property="make"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="modelColumn" text="Model">
+                <cellValueFactory>
+                    <PropertyValueFactory property="model"/>
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="yearColumn" text="Year">
+                <cellValueFactory>
+                    <PropertyValueFactory property="year"/>
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
 
-    <ListView fx:id="carListView" styleClass="car-list"/>
-
-    <Button text="View Details" onAction="#onViewDetailsButtonClick" styleClass="view-details-button"/>
+    <Label fx:id="carDetailsLabel"/>
 </VBox>
