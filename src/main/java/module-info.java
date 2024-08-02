@@ -13,6 +13,6 @@ module org.example.carassignment {
     requires com.google.gson;
     requires async.http.client;
 
-    opens org.example.carassignment to javafx.fxml;
+    opens org.example.carassignment to javafx.fxml, com.google.gson;
     exports org.example.carassignment;
 }

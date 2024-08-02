@@ -6,13 +6,7 @@ public class Car {
     private String model;
     private int year;
 
-    public Car(int id, String make, String model, int year) {
-        this.id = id;
-        this.make = make;
-        this.model = model;
-        this.year = year;
-    }
-
+    // Getters and setters
     public int getId() {
         return id;
     }
@@ -45,3 +39,4 @@ public class Car {
         this.year = year;
     }
 }
+

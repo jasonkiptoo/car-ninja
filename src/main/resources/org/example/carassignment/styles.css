@@ -16,3 +16,43 @@
 .list-view {
     -fx-padding: 10px;
 }
+.root {
+    -fx-background-color: navy;
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+.text-field, .button {
+    -fx-pref-width: 200px;
+}
+
+.text-field {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+.button {
+    -fx-background-color: lightgray;
+    -fx-text-fill: black;
+}
+
+.table-view {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}
+
+.table-column {
+    -fx-background-color: lightgray;
+    -fx-text-fill: black;
+}
+
+.table-row-cell:filled:selected, .table-row-cell:filled:selected:focused {
+    -fx-background-color: darkgray;
+}
+
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+}

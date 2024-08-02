@@ -5,17 +5,24 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="org.example.carassignment.HelloController">
+      fx:controller="org.example.carassignment.HelloController"
+      stylesheets="@styles.css">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
     </padding>
 
     <Label fx:id="welcomeText"/>
-    <Button text="Fetch Car Data" onAction="#onFetchCarData"/>
+
+    <HBox alignment="CENTER" spacing="10.0">
+        <TextField fx:id="searchField" promptText="Enter car model"/>
+        <Button text="Search Car Data" onAction="#onSearchCarData"/>
+    </HBox>
 
     <TableView fx:id="carTableView" onMouseClicked="#onCarSelected">
         <columns>
