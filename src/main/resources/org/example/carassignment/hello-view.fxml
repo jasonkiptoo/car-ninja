@@ -19,6 +19,7 @@
     </padding>
 
     <VBox fx:id="tableBox" alignment="CENTER" spacing="20.0">
+        <Label fx:id="carCountLabel" text="Cars found: 0"/>
         <HBox alignment="CENTER" spacing="10.0">
             <TextField fx:id="searchField" promptText="Enter car model"/>
             <Button text="Search Car Data" onAction="#onSearchCarData"/>
@@ -34,11 +35,6 @@
                         <PropertyValueFactory property="index"/>
                     </cellValueFactory>
                 </TableColumn>
-<!--                <TableColumn fx:id="idColumn" text="ID">-->
-<!--                    <cellValueFactory>-->
-<!--                        <PropertyValueFactory property="id"/>-->
-<!--                    </cellValueFactory>-->
-<!--                </TableColumn>-->
                 <TableColumn fx:id="makeColumn" text="Make">
                     <cellValueFactory>
                         <PropertyValueFactory property="make"/>

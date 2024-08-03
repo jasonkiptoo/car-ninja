@@ -21,17 +21,17 @@ public class HelloController {
     @FXML
     private TableView<Car> carTableView;
     @FXML
-    private TableColumn<Car, Integer> idColumn;
+    private TableColumn<Car, Integer> yearColumn;
     @FXML
     private TableColumn<Car, String> makeColumn;
     @FXML
     private TableColumn<Car, String> modelColumn;
     @FXML
-    private TableColumn<Car, Integer> yearColumn;
-    @FXML
     private TableColumn<Car, Integer> indexColumn;
     @FXML
     private Label carDetailsLabel;
+    @FXML
+    private Label carCountLabel; // New Label for car count
     @FXML
     private TextField searchField;
     @FXML
@@ -43,10 +43,9 @@ public class HelloController {
 
     @FXML
     public void initialize() {
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
         makeColumn.setCellValueFactory(new PropertyValueFactory<>("make"));
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
-        yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
 
         // Set the cell factory for the index column
         indexColumn.setCellFactory(col -> new TableCell<>() {
@@ -100,6 +99,7 @@ public class HelloController {
                 Gson gson = new Gson();
                 List<Car> cars = gson.fromJson(response.toString(), new TypeToken<List<Car>>() {}.getType());
                 carData.setAll(cars);
+                carCountLabel.setText("Cars found: " + cars.size()); // Update the car count
             } else {
                 System.out.println("GET request failed: " + responseCode);
             }
@@ -117,8 +117,7 @@ public class HelloController {
             tableBox.setVisible(false);
             tableBox.setManaged(false);
             carDetailsLabel.setText(
-                    "ID: " + selectedCar.getId() + "\n" +
-                            "Make: " + selectedCar.getMake() + "\n" +
+                    "Make: " + selectedCar.getMake() + "\n" +
                             "Model: " + selectedCar.getModel() + "\n" +
                             "Year: " + selectedCar.getYear() + "\n" +
                             "City MPG: " + selectedCar.getCityMpg() + "\n" +
