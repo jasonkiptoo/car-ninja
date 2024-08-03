@@ -3,23 +3,21 @@ package org.example.carassignment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 public class HelloController {
-    @FXML
-    private Label welcomeText;
     @FXML
     private TableView<Car> carTableView;
     @FXML
@@ -31,9 +29,15 @@ public class HelloController {
     @FXML
     private TableColumn<Car, Integer> yearColumn;
     @FXML
+    private TableColumn<Car, Integer> indexColumn;
+    @FXML
     private Label carDetailsLabel;
     @FXML
     private TextField searchField;
+    @FXML
+    private VBox detailsBox;
+    @FXML
+    private VBox tableBox;
 
     private final ObservableList<Car> carData = FXCollections.observableArrayList();
 
@@ -43,16 +47,29 @@ public class HelloController {
         makeColumn.setCellValueFactory(new PropertyValueFactory<>("make"));
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         yearColumn.setCellValueFactory(new PropertyValueFactory<>("year"));
+
+        // Set the cell factory for the index column
+        indexColumn.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Integer item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(String.valueOf(getIndex() + 1));
+                }
+            }
+        });
+
         carTableView.setItems(carData);
 
         // Fetch car data when the system starts
-        fetchCarData(""); // Optionally pass a default value or leave it empty
+        fetchCarData("camry");
     }
-
 
     @FXML
     private void onFetchCarData() {
-        fetchCarData("");
+        fetchCarData("camry");
     }
 
     @FXML
@@ -64,13 +81,13 @@ public class HelloController {
     private void fetchCarData(String model) {
         try {
             String apiKey = "rR27C8PXsHynl7caNW0YXnkkA1Xz3rp3pukAfU5G";
-            String apiUrl = "https://api.api-ninjas.com/v1/cars?limit=20&model=camry";
+            String apiUrl = "https://api.api-ninjas.com/v1/cars?limit=20&model=" + model;
             HttpURLConnection connection = (HttpURLConnection) new URL(apiUrl).openConnection();
             connection.setRequestProperty("X-Api-Key", apiKey);
             connection.setRequestMethod("GET");
 
             int responseCode = connection.getResponseCode();
-            if (responseCode == 200) { // HTTP OK
+            if (responseCode == 200) {
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 StringBuilder response = new StringBuilder();
@@ -95,10 +112,33 @@ public class HelloController {
     private void onCarSelected(MouseEvent event) {
         Car selectedCar = carTableView.getSelectionModel().getSelectedItem();
         if (selectedCar != null) {
-            carDetailsLabel.setText("ID: " + selectedCar.getId() + "\n" +
-                    "Make: " + selectedCar.getMake() + "\n" +
-                    "Model: " + selectedCar.getModel() + "\n" +
-                    "Year: " + selectedCar.getYear());
+            detailsBox.setVisible(true);
+            detailsBox.setManaged(true);
+            tableBox.setVisible(false);
+            tableBox.setManaged(false);
+            carDetailsLabel.setText(
+                    "ID: " + selectedCar.getId() + "\n" +
+                            "Make: " + selectedCar.getMake() + "\n" +
+                            "Model: " + selectedCar.getModel() + "\n" +
+                            "Year: " + selectedCar.getYear() + "\n" +
+                            "City MPG: " + selectedCar.getCityMpg() + "\n" +
+                            "Class: " + selectedCar.getCarClass() + "\n" +
+                            "Combination MPG: " + selectedCar.getCombinationMpg() + "\n" +
+                            "Cylinders: " + selectedCar.getCylinders() + "\n" +
+                            "Displacement: " + selectedCar.getDisplacement() + "\n" +
+                            "Drive: " + selectedCar.getDrive() + "\n" +
+                            "Fuel Type: " + selectedCar.getFuelType() + "\n" +
+                            "Highway MPG: " + selectedCar.getHighwayMpg() + "\n" +
+                            "Transmission: " + selectedCar.getTransmission()
+            );
         }
+    }
+
+    @FXML
+    private void onBackToTable() {
+        detailsBox.setVisible(false);
+        detailsBox.setManaged(false);
+        tableBox.setVisible(true);
+        tableBox.setManaged(true);
     }
 }
